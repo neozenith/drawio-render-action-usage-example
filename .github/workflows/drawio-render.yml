@@ -1,0 +1,26 @@
+name: Render Draw.io Diagrams
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Render Draw.io diagrams
+      uses: neozenith/drawio-render-action@v1
+      with:
+        input_path: 'docs/diagrams'
+        output_path: 'docs/pngs'
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: drawio-pngs
+        path: docs/pngs
